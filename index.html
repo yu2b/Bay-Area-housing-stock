@@ -8,37 +8,19 @@
     <!-- D3 -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            max-width:1000 px;
-            margin:auto;
-            padding:40 px;
-        }
-
-        h1{
-            text-align:center;
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>Bay Area Housing and Stock Market</h1>
+    <h1>Bay Area Housing and Stock Market</h1>
 
-<p>
-This is my D3 Narrative Visualization project.
-</p>
-<div id="chart"></div>
-<script>
-    const svg = d3.select("#chart")
-        .append("svg")
-        .attr("width", 500)
-        .attr("height", 300);
-    svg.append("circle")
-        .attr("cx", 250)
-        .attr("cy", 150)
-        .attr("r", 60);
-</script>
+    <p>
+    This is my D3 Narrative Visualization project.
+    </p>
+    <div id="chart"></div>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

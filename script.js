@@ -8,4 +8,6 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       return row.County == "Santa Clara County";
     });
     console.log(data);
+    console.log(santaClaraData);
+
 });

@@ -154,7 +154,7 @@ Promise.all([
       .attr("x", -innerHeight / 2)
       .attr("y", -55)
       .attr("text-anchor", "middle")
-      .text("Median Home Value ($)");
+      .text("Median Home Value (USD)");
     chart.append("text")
       .attr("class", "axis-label")
       .attr("transform", "rotate(-90)")

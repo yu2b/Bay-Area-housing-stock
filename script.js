@@ -25,7 +25,7 @@ Promise.all([
       top: 40,
       right: 30,
       bottom: 50,
-      left: 100  
+      left: 120  
       };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;

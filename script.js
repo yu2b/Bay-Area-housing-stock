@@ -1,11 +1,20 @@
-d3.csv("data/housing_bayarea_2010_2025.csv")
-  .then(data => {
-    data.forEach(row => {
+Promise.all([
+  d3.csv("data/housing_bayarea_2010_2025.csv"),
+  d3.csv("data/nasdaq_monthly_2010_2025.csv")
+  ]).then( ([housingData, nasdaqData]) => {
+    housingData.forEach(row => {
       row.Date = d3.timeParse("%Y-%m-%d")(row.Date);
       row.ZHVI = +row.ZHVI;
     });
+    nasdaqData.forEach(row => {
+      row.Date = d3.timeParse("%Y-%m-%d")(row.Date);
+      row.Close = +row.Close;
+    });
+    console.log("Housing:", housingData);
+    console.log("nasdaq:", nasdaqData;
+  
     let selectedCounty = "Santa Clara County";
-    let selectedCountyData = data.filter(row => {
+    let selectedCountyData = housingData.filter(row => {
       return row.County === selectedCounty;
     });
     
@@ -59,11 +68,9 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       .on("change", function () {
           selectedCounty = this.value;
         
-          selectedCountyData = data.filter(row => {
+          selectedCountyData = housingData.filter(row => {
             return row.County === selectedCounty;
           });
-          console.log(data);
-          console.log(selectedCountyData);
           // change yScale
           yScale.domain(
             d3.extent(selectedCountyData, row => row.ZHVI))

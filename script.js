@@ -8,7 +8,7 @@ Promise.all([
     });
     nasdaqData.forEach(row => {
       row.Date = d3.timeParse("%Y-%m-%d")(row.Date);
-      row.Close = +row.Close;
+      row.Close = +row.NASDAQCOM;
     });
     console.log("Housing:", housingData);
     console.log("nasdaq:", nasdaqData);
@@ -25,7 +25,7 @@ Promise.all([
       top: 40,
       right: 30,
       bottom: 50,
-      left: 80  
+      left: 90  
       };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -42,27 +42,42 @@ Promise.all([
       .domain(d3.extent(selectedCountyData, row => row.Date))
       .range([0, innerWidth]);
     
-    const yScale = d3.scaleLinear()
+    const housingYScale = d3.scaleLinear()
       .domain(d3.extent(selectedCountyData, row => row.ZHVI))
       .range([innerHeight, 0]);
+  
+    const nasdaqYScale = d3.scaleLinear()
+      .domain(d3.extent(nasdaqData, row => row.Close))
+      .nice()
+      .range([innerHeight, 0]);
+  
     // Create axes    
     chart.append("g")
       .attr("transform", `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale));
 
-   const yAxisGroup = chart.append("g")
-      .call(d3.axisLeft(yScale));
+   const housingYAxisGroup = chart.append("g")
+      .call(d3.axisLeft(housingYScale));
+  
+   const nasdaqYAxisGroup = chart.append("g")
+      .attr("transform", `translate(${innerWidth}, 0)`)
+      .call(d3.axisRight(nasdaqYScale));
     
     // Draw line
-    const line = d3.line()
+    const housingLine = d3.line()
       .x(d => xScale(d.Date))
-      .y(d => yScale(d.ZHVI))
+      .y(d => housingYScale(d.ZHVI))
     
     const housingPath = chart.append("path")
       .datum(selectedCountyData)
       .attr("class", "housing-line")
-      .attr("d", line)
-    
+      .attr("d", housingLine)
+  
+    const nasdaqPath = chart.append("path")
+      .datum(nasdaqData)
+      .attr("class", "nasdaq-line")
+      .attr("d", nasdaqLine);
+  
      // change county and path
     d3.select("#county-select")
       .on("change", function () {
@@ -71,15 +86,15 @@ Promise.all([
           selectedCountyData = housingData.filter(row => {
             return row.County === selectedCounty;
           });
-          // change yScale
-          yScale.domain(
+          // change housingYScale
+          housingYScale.domain(
             d3.extent(selectedCountyData, row => row.ZHVI))
             .nice();
-          yAxisGroup.call(d3.axisLeft(yScale));
+          housingYAxisGroup.call(d3.axisLeft(housingYScale));
         
           housingPath
             .datum(selectedCountyData)
-            .attr("d", line);
+            .attr("d", housingLine);
       });   
     
     // Axis labels
@@ -96,5 +111,12 @@ Promise.all([
       .attr("y", -55)
       .attr("text-anchor", "middle")
       .text("Median Home Value ($)");
+    chart.append("text")
+      .attr("class", "axis-label")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -innerHeight / 2)
+      .attr("y", innerWidth + 65)
+      .attr("text-anchor", "middle")
+      .text("NASDAQ Composite Index");
     
   });

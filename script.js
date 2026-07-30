@@ -18,7 +18,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
           });
           console.log(data);
           console.log(selectedCountyData);
-    });
+      });
     
    
     // Create SVG
@@ -29,7 +29,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       right: 30,
       bottom: 50,
       left: 80  
-    };
+      };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
     
@@ -61,12 +61,10 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       .x(d => xScale(d.Date))
       .y(d => yScale(d.ZHVI))
     
-    chart.append("path")
+    const housingPath = chart.append("path")
       .datum(selectedCountyData)
       .attr("d", line)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 2);
+      .attr("class", "housing-line")
     
     // Axis labels
     chart.append("text")

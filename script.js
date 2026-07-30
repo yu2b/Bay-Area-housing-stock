@@ -67,7 +67,7 @@ Promise.all([
            .tickFormat(d3.format(".2s"))
            );
     
-    // Draw line
+    // Draw Path
     const housingLine = d3.line()
       .x(d => xScale(d.Date))
       .y(d => housingYScale(d.ZHVI))
@@ -80,7 +80,16 @@ Promise.all([
       .datum(selectedCountyData)
       .attr("class", "housing-line")
       .attr("d", housingLine)
-  
+    
+    // Hide housing Path
+
+    const housingLength = housingPath.node().getTotalLength();
+    housingPath
+      .attr("stroke-dasharray", `${housingLength} ${housingLength}`)
+      .attr("stroke-dashoffset", housingLength);
+    
+    // Nasdaq Path
+
     const nasdaqPath = chart.append("path")
       .datum(nasdaqData)
       .attr("class", "nasdaq-line")

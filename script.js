@@ -83,20 +83,21 @@ Promise.all([
       .attr("d", nasdaqLine);
     
     // Transition
-    function animateLine(path, duration = 3000) {
+    function animateLine(path, duration = 3000, delay = 0) {
       const totalLength = path.node().getTotalLength();
 
       return path
         .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
         .attr("stroke-dashoffset", totalLength)
         .transition()
+        .delay(delay)
         .duration(duration)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
     }
     animateLine(nasdaqPath, 2500)
       .on("end", () => {
-        animateLine(housingPath, 2500);
+        animateLine(housingPath, 2500,300);
     });
   
   // change county and path

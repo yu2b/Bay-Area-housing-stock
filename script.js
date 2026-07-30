@@ -9,18 +9,6 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       return row.County === selectedCounty;
     });
     
-    // change county
-    d3.select("#county-select")
-      .on("change", function () {
-          selectedCounty = this.value;
-          selectedCountyData = data.filter(row => {
-            return row.County === selectedCounty;
-          });
-          console.log(data);
-          console.log(selectedCountyData);
-      });
-    
-   
     // Create SVG
     const width = 800;
     const height = 500;
@@ -63,8 +51,23 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
     
     const housingPath = chart.append("path")
       .datum(selectedCountyData)
-      .attr("d", line)
       .attr("class", "housing-line")
+      .attr("d", line)
+    
+     // change county and path
+    d3.select("#county-select")
+      .on("change", function () {
+          selectedCounty = this.value;
+        
+          selectedCountyData = data.filter(row => {
+            return row.County === selectedCounty;
+          });
+          console.log(data);
+          console.log(selectedCountyData);
+          housingPath
+            .datum(selectedCountyData)
+            .attr("d", line);
+      });   
     
     // Axis labels
     chart.append("text")

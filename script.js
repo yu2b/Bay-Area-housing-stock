@@ -23,7 +23,7 @@ Promise.all([
     const height = 500;
     const margin = {
       top: 40,
-      right: 30,
+      right: 80,
       bottom: 50,
       left: 120  
       };

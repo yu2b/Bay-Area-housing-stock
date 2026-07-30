@@ -4,13 +4,14 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       row.Date = d3.timeParse("%Y-%m-%d")(row.Date);
       row.ZHVI = +row.ZHVI;
     });
-
-    const santaClaraData = data.filter(row => {
-      return row.County === "Santa Clara County";
+    let selectedCounty = "Santa Clara County";
+    
+    const selectedCountyData = data.filter(row => {
+      return row.County === selectedCounty;
     });
 
     console.log(data);
-    console.log(santaClaraData);
+    console.log(selectedCountyData);
     // Create SVG
     const width = 800;
     const height = 500;
@@ -32,11 +33,11 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
     
     // Create scales    
     const xScale = d3.scaleTime()
-      .domain(d3.extent(santaClaraData, row => row.Date))
+      .domain(d3.extent(selectedCountyData, row => row.Date))
       .range([0, innerWidth]);
     
     const yScale = d3.scaleLinear()
-      .domain(d3.extent(santaClaraData, row => row.ZHVI))
+      .domain(d3.extent(selectedCountyData, row => row.ZHVI))
       .range([innerHeight, 0]);
     // Create axes    
     chart.append("g")
@@ -52,7 +53,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       .y(d => yScale(d.ZHVI))
     
     chart.append("path")
-      .datum(santaClaraData)
+      .datum(selectedCountyData)
       .attr("d", line)
       .attr("fill", "none")
       .attr("stroke", "steelblue")

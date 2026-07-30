@@ -62,7 +62,7 @@ Promise.all([
         //   );
   
     const housingYAxis = d3.axisLeft(housingYScale)
-      .tickFormat(d3.format("$.1s"));
+      .tickFormat(d3.format("$.2s"));
     const housingYAxisGroup = chart.append("g")
       .call(housingYAxis);
   
@@ -122,7 +122,7 @@ Promise.all([
         drawLine(housingPath);
       });
   
-  // change county and path
+  // change county, path, ans Yaxis
     d3.select("#county-select")
       .on("change", function () {
           selectedCounty = this.value;
@@ -134,7 +134,7 @@ Promise.all([
           housingYScale.domain(
             d3.extent(selectedCountyData, row => row.ZHVI))
             .nice();
-          housingYAxisGroup.call(housingYScale);
+          housingYAxisGroup.call(housingYAxis);
         
           housingPath
             .datum(selectedCountyData)

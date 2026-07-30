@@ -68,7 +68,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
           yScale.domain(
             d3.extent(selectedCountyData, row => row.ZHVI))
             .nice();
-          yAxisGoup.call(d3.axisLeft(yScale));
+          yAxisGroup.call(d3.axisLeft(yScale));
         
           housingPath
             .datum(selectedCountyData)

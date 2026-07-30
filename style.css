@@ -18,3 +18,8 @@ h1 {
     stroke: steelblue;
     stroke-width: 2;
  }
+.nasdaq-line {
+  fill: none;
+  stroke: darkorange;
+  stroke-width: 2;
+}

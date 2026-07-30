@@ -8,3 +8,8 @@ body {
 h1 {
     text-align: center;
 }
+.axis-label {
+    font-size: 14px;
+    font-weight: 600;
+    fill: #555;
+}

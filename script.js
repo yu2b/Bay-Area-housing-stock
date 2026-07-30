@@ -85,12 +85,11 @@ Promise.all([
     // transition
     function animateLine(path) {
       const totalLength = path.node().getTotalLength();
-
       path
         .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-        .duration(2500)
+        .duration(4000)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
     }

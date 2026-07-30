@@ -56,12 +56,17 @@ Promise.all([
       .attr("transform", `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale));
 
-   const housingYAxisGroup = chart.append("g")
-      .call(d3.axisLeft(housingYScale)
-           .tickFormat(d3.format("$.1s"))
-           );
+   //const housingYAxisGroup = chart.append("g")
+      //.call(d3.axisLeft(housingYScale)
+        //   .tickFormat(d3.format("$.1s"))
+        //   );
   
-   const nasdaqYAxisGroup = chart.append("g")
+    const housingYAxis = d3.axisLeft(housingYScale)
+      .tickFormat(d3.format("$.1s"));
+    const housingYAxisGroup = chart.append("g")
+      .call(housingYAxis);
+  
+    const nasdaqYAxisGroup = chart.append("g")
       .attr("transform", `translate(${innerWidth}, 0)`)
       .call(d3.axisRight(nasdaqYScale)
            .tickFormat(d3.format(".2s"))
@@ -129,7 +134,7 @@ Promise.all([
           housingYScale.domain(
             d3.extent(selectedCountyData, row => row.ZHVI))
             .nice();
-          housingYAxisGroup.call(d3.axisLeft(housingYScale));
+          housingYAxisGroup.call(housingYScale);
         
           housingPath
             .datum(selectedCountyData)

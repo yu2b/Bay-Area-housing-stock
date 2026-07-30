@@ -82,22 +82,24 @@ Promise.all([
       .attr("class", "nasdaq-line")
       .attr("d", nasdaqLine);
     
-    // transition
-    function animateLine(path) {
+    // Transition
+    function animateLine(path, duration = 3000) {
       const totalLength = path.node().getTotalLength();
-      path
+
+      return path
         .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-        .duration(4000)
+        .duration(duration)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
     }
+    animateLine(nasdaqPath, 2500)
+      .on("end", () => {
+        animateLine(housingPath, 2500);
+    });
   
-    animateLine(housingPath);
-    animateLine(nasdaqPath);
-  
-     // change county and path
+  // change county and path
     d3.select("#county-select")
       .on("change", function () {
           selectedCounty = this.value;

@@ -11,7 +11,7 @@ Promise.all([
       row.Close = +row.Close;
     });
     console.log("Housing:", housingData);
-    console.log("nasdaq:", nasdaqData;
+    console.log("nasdaq:", nasdaqData);
   
     let selectedCounty = "Santa Clara County";
     let selectedCountyData = housingData.filter(row => {

@@ -53,7 +53,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
     
     chart.append("path")
       .datum(santaClaraData)
-      .attr("d", line);
+      .attr("d", line)
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2);

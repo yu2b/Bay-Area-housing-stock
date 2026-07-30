@@ -128,25 +128,25 @@ Promise.all([
     legend.append("line")
       .attr("x1", 0)
       .attr("x2", 30)
-      .attr("y1", 0)
-      .attr("y2", 0)
+      .attr("y1", 10)
+      .attr("y2", 10)
       .attr("class", "housing-line");
 
     legend.append("text")
       .attr("x", 40)
-      .attr("y", 5)
+      .attr("y", 15)
       .text("Housing Price");
   
     legend.append("line")
       .attr("x1", 0)
       .attr("x2", 30)
-      .attr("y1", 25)
-      .attr("y2", 25)
+      .attr("y1", 35)
+      .attr("y2", 35)
       .attr("class", "nasdaq-line");
 
     legend.append("text")
       .attr("x", 40)
-      .attr("y", 5)
+      .attr("y", 40)
       .text("NASDAQ Composite");
     
   });

@@ -57,13 +57,16 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       .attr("fill", "none")
       .attr("stroke", "steelblue")
       .attr("stroke-width", 2);
+    
     // Axis labels
     chart.append("text")
+      .attr("class", "axis-label")
       .attr("x", innerWidth / 2)
       .attr("y", innerHeight + 45)
       .attr("text-anchor", "middle")
       .text("Year");
     chart.append("text")
+      .attr("class", "axis-label")
       .attr("transform", "rotate(-90)")
       .attr("x", -innerHeight / 2)
       .attr("y", -55)

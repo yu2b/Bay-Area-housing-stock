@@ -67,7 +67,7 @@ Promise.all([
     const housingLine = d3.line()
       .x(d => xScale(d.Date))
       .y(d => housingYScale(d.ZHVI))
-     const nasdaqLine = d3.line()
+    const nasdaqLine = d3.line()
       .x(d => xScale(d.Date))
       .y(d => nasdaqYScale(d.Close))
     
@@ -124,7 +124,8 @@ Promise.all([
     // legend
     const legend = chart.append("g")
       .attr("class", "legend")
-      .attr("transform", `translate(${innerWidth - 180}, 20)`);
+      .attr("transform", 'translate(80, 20)');
+  
     legend.append("line")
       .attr("x1", 0)
       .attr("x2", 30)

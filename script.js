@@ -25,7 +25,7 @@ Promise.all([
       top: 40,
       right: 30,
       bottom: 50,
-      left: 90  
+      left: 100  
       };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -67,6 +67,9 @@ Promise.all([
     const housingLine = d3.line()
       .x(d => xScale(d.Date))
       .y(d => housingYScale(d.ZHVI))
+     const nasdaqLine = d3.line()
+      .x(d => xScale(d.Date))
+      .y(d => nasdaqYScale(d.Close))
     
     const housingPath = chart.append("path")
       .datum(selectedCountyData)

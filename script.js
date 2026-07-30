@@ -5,13 +5,22 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
       row.ZHVI = +row.ZHVI;
     });
     let selectedCounty = "Santa Clara County";
-    
-    const selectedCountyData = data.filter(row => {
+    let selectedCountyData = data.filter(row => {
       return row.County === selectedCounty;
     });
-
-    console.log(data);
-    console.log(selectedCountyData);
+    
+    // change county
+    d3.select("#county-select")
+      .on("change", function () {
+          selectedCounty = this.value;
+          selectedCountyData = data.filter(row => {
+            return row.County === selectedCounty;
+          });
+          console.log(data);
+          console.log(selectedCountyData);
+    });
+    
+   
     // Create SVG
     const width = 800;
     const height = 500;

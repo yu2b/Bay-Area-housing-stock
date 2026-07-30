@@ -11,7 +11,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
 
     console.log(data);
     console.log(santaClaraData);
-
+    // Create SVG
     const width = 800;
     const height = 500;
     const margin = {
@@ -30,6 +30,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
     const chart = svg.append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
     
+    // Create scales    
     const xScale = d3.scaleTime()
       .domain(d3.extent(santaClaraData, row => row.Date))
       .range([0, innerWidth]);
@@ -37,7 +38,7 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
     const yScale = d3.scaleLinear()
       .domain(d3.extent(santaClaraData, row => row.ZHVI))
       .range([innerHeight, 0]);
-    
+    // Create axes    
     chart.append("g")
       .attr("transform", `translate(0, ${innerHeight})`)
       .call(d3.axisBottom(xScale));
@@ -45,4 +46,15 @@ d3.csv("data/housing_bayarea_2010_2025.csv")
     chart.append("g")
       .call(d3.axisLeft(yScale));
     
+    // Draw line
+    const line = d3.line()
+      .x(d => xScale(d.Date))
+      .y(d => yScale(d.ZHVI))
+    
+    chart.append("path")
+      .datum(santaClaraData)
+      .attr("d", line);
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 2);
   });

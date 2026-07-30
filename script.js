@@ -121,5 +121,32 @@ Promise.all([
       .attr("y", innerWidth + 65)
       .attr("text-anchor", "middle")
       .text("NASDAQ Composite Index");
+    // legend
+    const legend = chart.append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(${innerWidth - 180}, 20)`);
+    legend.append("line")
+      .attr("x1", 0)
+      .attr("x2", 30)
+      .attr("y1", 0)
+      .attr("y2", 0)
+      .attr("class", "housing-line");
+
+    legend.append("text")
+      .attr("x", 40)
+      .attr("y", 5)
+      .text("Housing Price");
+  
+    legend.append("line")
+      .attr("x1", 0)
+      .attr("x2", 30)
+      .attr("y1", 25)
+      .attr("y2", 25)
+      .attr("class", "nasdaq-line");
+
+    legend.append("text")
+      .attr("x", 40)
+      .attr("y", 5)
+      .text("NASDAQ Composite");
     
   });

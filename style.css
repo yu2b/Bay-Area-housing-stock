@@ -13,3 +13,8 @@ h1 {
     font-weight: 600;
     fill: #555;
 }
+ .housing-line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2;
+ }

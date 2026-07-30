@@ -67,6 +67,7 @@ Promise.all([
     const housingLine = d3.line()
       .x(d => xScale(d.Date))
       .y(d => housingYScale(d.ZHVI))
+  
     const nasdaqLine = d3.line()
       .x(d => xScale(d.Date))
       .y(d => nasdaqYScale(d.Close))
@@ -80,6 +81,22 @@ Promise.all([
       .datum(nasdaqData)
       .attr("class", "nasdaq-line")
       .attr("d", nasdaqLine);
+    
+    // transition
+    function animateLine(path) {
+      const totalLength = path.node().getTotalLength();
+
+      path
+        .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(2500)
+        .ease(d3.easeLinear)
+        .attr("stroke-dashoffset", 0);
+    }
+  
+    animateLine(housingPath);
+    animateLine(nasdaqPath);
   
      // change county and path
     d3.select("#county-select")

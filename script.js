@@ -57,11 +57,15 @@ Promise.all([
       .call(d3.axisBottom(xScale));
 
    const housingYAxisGroup = chart.append("g")
-      .call(d3.axisLeft(housingYScale));
+      .call(d3.axisLeft(housingYScale)
+           .tickFormat(d3.format("$.1s"))
+           );
   
    const nasdaqYAxisGroup = chart.append("g")
       .attr("transform", `translate(${innerWidth}, 0)`)
-      .call(d3.axisRight(nasdaqYScale));
+      .call(d3.axisRight(nasdaqYScale)
+           .tickFormat(d3.format(".2s"))
+           );
     
     // Draw line
     const housingLine = d3.line()

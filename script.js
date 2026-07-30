@@ -80,38 +80,42 @@ Promise.all([
       .datum(selectedCountyData)
       .attr("class", "housing-line")
       .attr("d", housingLine)
-    
-    // Hide housing Path
-
-    const housingLength = housingPath.node().getTotalLength();
-    housingPath
-      .attr("stroke-dasharray", `${housingLength} ${housingLength}`)
-      .attr("stroke-dashoffset", housingLength);
-    
-    // Nasdaq Path
 
     const nasdaqPath = chart.append("path")
       .datum(nasdaqData)
       .attr("class", "nasdaq-line")
       .attr("d", nasdaqLine);
-    
-    // Transition
-    function animateLine(path, duration = 3000, delay = 0) {
-      const totalLength = path.node().getTotalLength();
 
+    // Prepare a path for drawing animation
+    function hideLine(path) {
+      const length = path.node().getTotalLength();
+
+      path
+        .attr("stroke-dasharray", length)
+        .attr("stroke-dashoffset", length);
+    }
+
+
+    // Draw the line
+    function drawLine(path, duration = 2500) {
       return path
-        .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
-        .attr("stroke-dashoffset", totalLength)
         .transition()
-        .delay(delay)
         .duration(duration)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
-    }
-    animateLine(nasdaqPath, 2500)
+     }
+
+
+    // Hide both lines first
+    hideLine(housingPath);
+    hideLine(nasdaqPath);
+
+
+    // Draw NASDAQ first, then housing
+    drawLine(nasdaqPath)
       .on("end", () => {
-        animateLine(housingPath, 2500,300);
-    });
+        drawLine(housingPath);
+      });
   
   // change county and path
     d3.select("#county-select")

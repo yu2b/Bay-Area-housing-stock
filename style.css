@@ -12,6 +12,12 @@ h1 {
     font-weight: 400;
 }
 
+.interaction-hint {
+  margin: 8px 0 4px;
+  color: #666;
+  font-size: 13px;
+  font-style: italic;
+}
 .controls-row {
     display: flex;
     align-items: center;

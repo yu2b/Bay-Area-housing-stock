@@ -1,16 +1,96 @@
 body {
     font-family: Arial, sans-serif;
+    font-weight: 400;
     max-width: 1000px;
     margin: auto;
     padding: 40px;
+    color: #2f2f2f;
 }
 
 h1 {
     text-align: center;
+    font-weight: 400;
 }
+
+.controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 40px;
+    gap: 8px;
+    margin: 18px 0;
+}
+
+#county-control,
+#scene-navigation {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#county-control[hidden] {
+    display: none;
+}
+
+#county-select {
+    padding: 7px 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: white;
+    font: inherit;
+}
+
+.scene-button,
+#next-button {
+    min-width: 38px;
+    padding: 8px 12px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    font: inherit;
+    cursor: pointer;
+}
+
+.scene-button:hover,
+#next-button:hover:not(:disabled) {
+    background: #eeeeee;
+}
+
+.scene-button.active {
+    border-color: #333;
+    background: #333;
+    color: white;
+}
+
+.scene-button:focus-visible,
+#next-button:focus-visible,
+#county-select:focus-visible {
+    outline: 3px solid #8ec5ff;
+    outline-offset: 2px;
+}
+
+#next-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+#chart svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.line-hit-area {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 16;
+    pointer-events: stroke;
+    cursor: crosshair;
+}
+
 .axis-label {
     font-size: 14px;
-    font-weight: 600;
     fill: #555;
 }
  .housing-line {
@@ -26,4 +106,95 @@ h1 {
 .legend text {
   font-size: 13px;
   fill: #444;
+}
+.annotation {
+    font-size: 13px;
+    fill: #696969;
+    pointer-events: none;
+}
+
+.annotation-text text {
+    paint-order: stroke;
+    stroke: white;
+    stroke-width: 5px;
+    stroke-linejoin: round;
+}
+
+.annotation-year-guide,
+.annotation-leader,
+.annotation-recovery-line {
+    stroke: #777;
+    stroke-width: 1.25;
+    stroke-dasharray: 4 3;
+}
+
+.annotation-point,
+.hover-point {
+    stroke: white;
+    stroke-width: 2;
+    pointer-events: none;
+}
+
+.housing-annotation-point,
+.housing-hover-point {
+    fill: steelblue;
+}
+
+.nasdaq-annotation-point,
+.nasdaq-hover-point {
+    fill: darkorange;
+}
+
+.annotation-value {
+    font-size: 11px;
+    paint-order: stroke;
+    stroke: white;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+}
+
+.chart-tooltip {
+    position: fixed;
+    z-index: 10;
+    pointer-events: none;
+    padding: 8px 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #2f2f2f;
+    font-size: 13px;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.error-message {
+    color: #a32121;
+    text-align: center;
+}
+
+.data-source {
+    margin-top: 10px;
+    color: #666;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.data-source a {
+    color: inherit;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px;
+    }
+
+    .controls-row,
+    #scene-navigation {
+        flex-wrap: wrap;
+    }
+
+    .controls-row {
+        align-items: flex-start;
+    }
 }

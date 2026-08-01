@@ -17,22 +17,43 @@
     <h1>Bay Area Housing and Stock Market</h1>
 
     <p>
-    This is my D3 Narrative Visualization project.
+    From 2010 to 2025, Bay Area housing prices and the NASDAQ generally rose together, but their post-pandemic recovery diverged and housing growth varied by county.
     </p>
    
-    <label for="county-select">County:</label>
+    <div class="controls-row">
+        <nav id="scene-navigation" aria-label="Visualization scenes">
+            <button type="button" class="scene-button active" data-scene="1" aria-pressed="true">1</button>
+            <button type="button" class="scene-button" data-scene="2" aria-pressed="false">2</button>
+            <button type="button" class="scene-button" data-scene="3" aria-pressed="false">3</button>
+            <button type="button" id="next-button">NEXT ›</button>
+        </nav>
 
-    <select id="county-select">
-      <option value="Santa Clara County">Santa Clara County</option>
-      <option value="San Mateo County">San Mateo County</option>
-      <option value="Alameda County">Alameda County</option>
-      <option value="Contra Costa County">Contra Costa County</option>
-      <option value="Marin County">Marin County</option>
-      <option value="San Francisco County">San Francisco County</option>
-      <option value="Sonoma County">Sonoma County</option>
-    </select>
+        <div id="county-control" hidden>
+            <label for="county-select">Bay Area County:</label>
+
+            <select id="county-select">
+                <option value="Santa Clara County">Santa Clara County</option>
+                <option value="San Mateo County">San Mateo County</option>
+                <option value="Alameda County">Alameda County</option>
+                <option value="Contra Costa County">Contra Costa County</option>
+                <option value="Marin County">Marin County</option>
+                <option value="San Francisco County">San Francisco County</option>
+                <option value="Sonoma County">Sonoma County</option>
+            </select>
+        </div>
+    </div>
+    
 
     <div id="chart"></div>
+
+    <footer class="data-source">
+        Sources:
+        <a href="https://www.zillow.com/research/data/">Zillow Home Value Index (ZHVI)</a>
+        and
+        <a href="https://fred.stlouisfed.org/series/NASDAQCOM">NASDAQ Composite (NASDAQCOM), FRED</a>.
+        Monthly data, 2010–2025.
+    </footer>
+
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>

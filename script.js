@@ -406,7 +406,8 @@ Promise.all([
         (nasdaqEnd.Close / nasdaqPeak2021.Close - 1) * 100;
 
       addNarrativeText([
-        "Both series surged during the pandemic recovery.",
+        "Both series generally increased from 2010 to 2025,",
+        "but they peaked at different times.",
         "NASDAQ peaked in Dec. 2021; housing in Jun. 2022.",
         "Both then declined.",
         `By Dec. 2025, NASDAQ was ${formatPercent(nasdaqRecovery)}% above its prior peak,`,
